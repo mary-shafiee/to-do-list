@@ -8,7 +8,7 @@
     </form>
     <ul id="js__list" class="t_head">
     </ul>
-    <table class="table table-striped table-dark">
+    <table class="table table-striped table-dark" >
       <thead>
       <tr>
         <th scope="col">Task</th>
@@ -20,22 +20,22 @@
       </thead>
       <tbody>
       <tr v-for="(task , index) in tasks" :key="index">
-        <th>{{task.name}}</th>
-        <td style="width: 200px">
+        <th style="width: 150px" class="center" >{{task.name}}</th>
+        <td style="width: 150px">
           <span  @click="changeStatus(index)" class="pointer">{{ task.status }}</span>
         </td >
-        <td style="width: 200px">
+        <td style="width: 150px">
           <div class="pointer" @click="ediTask(index)">
             <span class="fas fa-pen"></span>
           </div>
         </td>
-        <td style="width: 200px">
+        <td style="width: 150px">
           <div class="pointer" @click="deleteTask(index)">
           <span class="fas fa-trash"></span>
           </div>
         </td>
-        <td style="width: 200px">
-          <div class="center">
+        <td style="width:150px">
+          <div class="pointer" @click="strikeOuTASK(index)">
             <span class="fas fa-strikethrough"></span>
           </div>
         </td>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'todolist',
   props: {
     msg: String
   },
@@ -98,6 +98,9 @@ export default {
         nextIndex = 0
       }
       this.tasks[index].status = this.statuses[nextIndex]
+    },
+    strikeOuTASK(index){
+      this.task[index].classList.toggle('strikethrough');
     }
   }
 };
@@ -138,6 +141,9 @@ table{
 }
 .pointer{
   cursor: pointer;
+}
+.strikethrough{
+  text-decoration: line-through;
 }
 
 
