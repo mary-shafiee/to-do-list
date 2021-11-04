@@ -9,7 +9,7 @@
     <ul id="js__list" class="t_head">
     </ul>
     <table class="table table-striped table-dark" >
-      <thead>
+      <thead v-if="tasks[0] !== undefined">
       <tr>
         <th scope="col">Task</th>
         <th scope="col">Status</th>
@@ -20,7 +20,7 @@
       </thead>
       <tbody>
       <tr v-for="(task , index) in tasks" :key="index">
-        <th style="width: 150px" class="center" >{{task.name}}</th>
+        <th style="width: 150px" class="center" :class="strikeTask(index)" >{{task.name}}</th>
         <td style="width: 150px">
           <span  @click="changeStatus(index)" class="pointer">{{ task.status }}</span>
         </td >
@@ -58,16 +58,7 @@ export default {
       task:'',
       editNumber:null,
       statuses:['in-progress', 'wait' , 'done'],
-      tasks:[
-        {
-          name:'task-one',
-          status:'wait'
-        },
-        {
-          name:'task-two',
-          status:'in-progress'
-        },
-      ]
+      tasks:[]
     }
   },
   methods:{
@@ -76,7 +67,8 @@ export default {
      if(this.editNumber===null) {
        this.tasks.push({
          name: this.task,
-         status: 'in-progress'
+         status: 'in-progress',
+         strike: false,
        })
      }
      else{
@@ -99,8 +91,12 @@ export default {
       }
       this.tasks[index].status = this.statuses[nextIndex]
     },
+    strikeTask(index){
+      if(this.tasks[index].strike === true)
+        return "strikethrough"
+    },
     strikeOuTASK(index){
-      this.task[index].classList.toggle('strikethrough');
+      this.tasks[index].strike = !this.tasks[index].strike;
     }
   }
 };

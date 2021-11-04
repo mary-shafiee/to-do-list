@@ -1,5 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app"
+       style="background-color: #E7D2CC; height: 100vh; position: fixed; width: 100vw"
+  >
     <todo-app></todo-app>
   </div>
 </template>
